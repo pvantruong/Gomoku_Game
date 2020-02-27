@@ -140,11 +140,13 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\..\..\OneDrive\Máy tính\Console.h\kmin_console.cpp" />
     <ClCompile Include="Board.cpp" />
+    <ClCompile Include="Flag.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\..\OneDrive\Máy tính\Console.h\kmin_console.h" />
     <ClInclude Include="Board.h" />
+    <ClInclude Include="Flag.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

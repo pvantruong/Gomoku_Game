@@ -1,7 +1,7 @@
 #include "Board.h"
 Matrix matrix[WIDTH_B][LENGTH_B];
 
-void Board::initialize() {
+Board::Board() {
 	for (int i = 0; i < WIDTH_B; i++) {
 		for (int j = 0; j < LENGTH_B; j++) {
 			matrix[i][j].x = LEFT_MARGIN + 2 + j * 4;

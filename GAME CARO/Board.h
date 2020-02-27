@@ -24,7 +24,7 @@ class Board {
 private:
 	
 public:
-	void initialize();
+	Board();
 	void print_board();
 };
 
