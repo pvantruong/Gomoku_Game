@@ -1,5 +1,11 @@
-#include <iostream>
+#include "Board.h"
+
 using namespace std;
 void main() {
-	cout << "Game Caro";
+	/*for (int i = 0; i < 256; i++) {
+		cout << i << ": " << (char)i << endl;
+	}*/
+	Board board;
+	board.initialize();
+	board.print_board();
 }
