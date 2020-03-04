@@ -7,13 +7,13 @@ void main() {
 	}*/
 	Board board;
 	board.print_board();
-	Flag flag;
-	int n = 0;
-	while (n != 30) {
-		flag.get_char();
-		n++;
-	}
-	flag.check_print_brack_flag();
-	board.print_board();
+	Flag flag; 
+	int n, m = 0;
+	while (1) {
+		n = flag.get_char();
+		m = flag.check_win(n);
+		flag.win_treatment(m);
 
+		
+	}
 }

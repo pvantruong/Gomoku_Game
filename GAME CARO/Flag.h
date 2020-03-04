@@ -5,8 +5,10 @@ private:
 	Matrix cursor;
 public:
 	Flag();
-	void get_char();
-	void check_print_brack_flag();
+	int get_char();
+	void check_print_back_flag();
+	int check_win(int get_ch);
+	void win_treatment(int check_win);
 };
 
 

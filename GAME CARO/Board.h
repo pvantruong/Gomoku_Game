@@ -1,7 +1,7 @@
 #pragma once
 #include "kmin_console.h"
-#define LENGTH_B 8
-#define WIDTH_B 8
+#define LENGTH_B 12
+#define WIDTH_B 12
 #define LEFT_MARGIN 3
 #define UP_MARGIN 2
 #define BLOCK_CORNER (char)206
