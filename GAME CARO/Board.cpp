@@ -1,11 +1,13 @@
 #include "Board.h"
 Matrix matrix[WIDTH_B][LENGTH_B];
+Matrix array_saved_flag[WIDTH_B * LENGTH_B];
 
 Board::Board() {
 	for (int i = 0; i < WIDTH_B; i++) {
 		for (int j = 0; j < LENGTH_B; j++) {
 			matrix[i][j].x = LEFT_MARGIN + 2 + j * 4;
 			matrix[i][j].y = UP_MARGIN + 1 + i * 2;
+			matrix[i][j].tag = 0;
 		}
 	}
 }
@@ -59,4 +61,18 @@ void Board::print_board() {
 		}
 	}
 }
+// Dont use
+void Board::save_flag_to_file(int get_ch) {
+	if (get_ch != 0) { //Only implement this action when get_ch is 1 or 2
+		fstream save_flag("save_flag.txt");
+		for (int i = 0; i < WIDTH_B; i++) {
+			for (int j = 0; j < LENGTH_B; j++) {
+				save_flag << matrix[i][j].tag;
+			}
+			save_flag << endl;
+		}
+		save_flag.close();
 
+
+	}
+}

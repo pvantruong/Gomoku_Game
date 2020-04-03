@@ -148,6 +148,9 @@
     <ClInclude Include="Board.h" />
     <ClInclude Include="Flag.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="save_flag.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

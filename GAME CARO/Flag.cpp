@@ -1,4 +1,5 @@
 #include "Flag.h"
+#include <string>
 
 Flag::Flag() {
 	//Initialize cursor location
@@ -33,20 +34,64 @@ int Flag::get_char() {
 		return 0;
 		break;
 	case 'x':
-		//Assign tag 
-		matrix[cursor.y][cursor.x].tag = 10;
-		cout << "X";
-		gotoXY(x, y);
-		return 10;
+		return 1;
 		break;
 	case 'o':
-		matrix[cursor.y][cursor.x].tag = 20;
-		cout << "O";
-		gotoXY(x, y);
-		return 20;
+		return 2;
+		break;
+	case 'r':
+		return 3;
 		break;
 	}
 }
+void Flag::display_flag(int get_ch) {
+	int x = whereX(); int y = whereY();
+	switch (get_ch) {
+	case 1:
+		//Assign tag 
+		if (matrix[cursor.y][cursor.x].tag == 0 && check_turn == 1) {
+			matrix[cursor.y][cursor.x].tag = 1;
+			//Save date into array_saved_flag
+			array_saved_flag[count_turn] = cursor;
+			array_saved_flag[count_turn].tag = 1;
+			//
+			cout << "X";
+			count_turn++;
+			check_turn = 2;
+			gotoXY(x, y);
+		}
+		break;
+	case 2:
+		if (matrix[cursor.y][cursor.x].tag == 0 && check_turn == 2) {
+			matrix[cursor.y][cursor.x].tag = 2;
+			//Save date into array_saved_flag
+			array_saved_flag[count_turn] = cursor;
+			array_saved_flag[count_turn].tag = 2;
+			//
+			cout << "O";
+			count_turn++;
+			check_turn = 1;
+			gotoXY(x, y);
+		}
+		break;
+	case 3: //Case return
+		gotoXY(matrix[array_saved_flag[count_turn - 1].y][array_saved_flag[count_turn - 1].x].x, matrix[array_saved_flag[count_turn - 1].y][array_saved_flag[count_turn - 1].x].y);
+		matrix[array_saved_flag[count_turn - 1].y][array_saved_flag[count_turn - 1].x].tag = 0;
+		//Edit cursor
+		cursor = array_saved_flag[count_turn - 1];
+		//Edit check_turn
+		if (count_turn % 2 == 0) {
+			check_turn = 2;
+		}
+		else check_turn = 1;
+		x = whereX(); y = whereY();
+		cout << " ";
+		gotoXY(x, y);
+		count_turn--;
+		break;
+	}
+}
+//Dont use
 void Flag::check_print_back_flag() {
 	clrscr();
 	cout << "Ok, now we will check our matrix.tag =  )))";
@@ -55,22 +100,23 @@ void Flag::check_print_back_flag() {
 	for (int i = 0; i < WIDTH_B; i++) {
 		for (int j = 0; j < LENGTH_B; j++) {
 			gotoXY(matrix[i][j].x, matrix[i][j].y);
-			if (matrix[i][j].tag == 10) { cout << "X"; }
-			else if (matrix[i][j].tag == 20) { cout << "O"; }
+			if (matrix[i][j].tag == 1) { cout << "X"; }
+			else if (matrix[i][j].tag == 2) { cout << "O"; }
 		}
 	}
 }
+//
 void Flag::win_treatment(int check_win) {
-	if (check_win == 10) {
+	if (check_win == 1) {
 		gotoXY(10, 10);
 		cout << "Yeahh, X win!";
 	}
-	else if (check_win == 20) {
+	else if (check_win == 2) {
 		gotoXY(10, 10);
 		cout << "Yeahh, O win!";
 	}
 }
-int Flag::check_win(int get_ch) {
+int Flag::check_win(int get_ch) { // get_ch is the value return from int get_ch()
 	if (get_ch != 0) { //Only implement check_win when input is 'X' or 'O'
 		//int x = cursor.x, y = cursor.y;
 		int tag = get_ch, continuous_count = 0;
@@ -125,7 +171,54 @@ int Flag::check_win(int get_ch) {
 			}
 		}
 	}
+	return 0;
 }
+//
+
+void Flag::save_flag(int get_ch) {
+	fstream save_flag("save_flag.txt", ios::app);
+	if (get_ch == 1 || get_ch == 2) { //Only implement this action when get_ch is 1 or 2
+		save_flag << count_turn << "," << cursor.y << "," << cursor.x << "," << matrix[cursor.y][cursor.x].tag << ",";
+	}
+	save_flag.close();
+}
+void Flag::load_flag_from_file(int get_ch) {
+	fstream load_flag("save_flag.txt");
+	if (get_ch == 1 || get_ch == 2) { //Only implement this action when get_ch is 1 or 2
+		string str_count, str_x, str_y, str_tag;
+		int int_count = 0, int_x, int_y, int_tag;
+		do {
+			getline(load_flag, str_count, ',');
+			int_count = stoi(str_count);
+		} while (int_count != count_turn);
+		getline(load_flag, str_y, ',');
+		getline(load_flag, str_x, ',');
+		getline(load_flag, str_tag, ',');
+		//CHECK
+		int x = whereX(), y = whereY();
+		gotoXY(2, WIDTH_B*2 + count_turn - 1000);
+		cout << "str_x = " << stoi(str_x);
+		cout << "str_y = " << stoi(str_y);
+		cout << "str_tag = " << stoi(str_tag);
+		gotoXY(x, y);
+		//END CHECK
+
+
+		array_saved_flag[count_turn - 1001].x = stoi(str_x); 
+		array_saved_flag[count_turn - 1001].y = stoi(str_y); 
+		array_saved_flag[count_turn - 1001].tag = stoi(str_tag);
+		
+	}
+}
+
+
+
+
+
+
+
+
+
 
 /*
 

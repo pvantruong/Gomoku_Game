@@ -11,9 +11,11 @@ void main() {
 	int n, m = 0;
 	while (1) {
 		n = flag.get_char();
+		flag.display_flag(n);
 		m = flag.check_win(n);
 		flag.win_treatment(m);
-
-		
+		//board.save_flag_to_file(n);
+		//flag.save_flag(n);
+		//flag.load_flag_from_file(n);
 	}
 }

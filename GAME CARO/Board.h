@@ -1,5 +1,6 @@
 #pragma once
 #include "kmin_console.h"
+#include <fstream>
 #define LENGTH_B 12
 #define WIDTH_B 12
 #define LEFT_MARGIN 3
@@ -20,11 +21,13 @@ struct Matrix {
 	int tag = 0;
 };
 extern Matrix matrix[WIDTH_B][LENGTH_B];
+extern Matrix array_saved_flag[WIDTH_B * LENGTH_B];
 class Board {
 private:
-	
+
 public:
 	Board();
 	void print_board();
+	void save_flag_to_file(int get_ch);
 };
 
