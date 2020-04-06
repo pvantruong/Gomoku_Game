@@ -1,5 +1,6 @@
 #pragma once
 #include "Board.h"
+
 class Flag {
 private: 
 	Matrix cursor;
@@ -8,7 +9,7 @@ private:
 public:
 	Flag();
 	int get_char();
-	void check_print_back_flag();
+	
 	void display_flag(int get_ch);
 	int check_win(int get_ch);
 	void win_treatment(int check_win);

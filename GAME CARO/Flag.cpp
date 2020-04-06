@@ -92,24 +92,12 @@ void Flag::display_flag(int get_ch) {
 	}
 }
 //Dont use
-void Flag::check_print_back_flag() {
-	clrscr();
-	cout << "Ok, now we will check our matrix.tag =  )))";
-	Sleep(1000);
-	clrscr();
-	for (int i = 0; i < WIDTH_B; i++) {
-		for (int j = 0; j < LENGTH_B; j++) {
-			gotoXY(matrix[i][j].x, matrix[i][j].y);
-			if (matrix[i][j].tag == 1) { cout << "X"; }
-			else if (matrix[i][j].tag == 2) { cout << "O"; }
-		}
-	}
-}
+
 //
 void Flag::win_treatment(int check_win) {
 	if (check_win == 1) {
-		gotoXY(10, 10);
-		cout << "Yeahh, X win!";
+		clrscr();
+
 	}
 	else if (check_win == 2) {
 		gotoXY(10, 10);

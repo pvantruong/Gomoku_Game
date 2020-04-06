@@ -8,14 +8,12 @@ void main() {
 	Board board;
 	board.print_board();
 	Flag flag; 
-	int n, m = 0;
+	int get_ch, check_win = 0;
 	while (1) {
-		n = flag.get_char();
-		flag.display_flag(n);
-		m = flag.check_win(n);
-		flag.win_treatment(m);
-		//board.save_flag_to_file(n);
-		//flag.save_flag(n);
-		//flag.load_flag_from_file(n);
+		get_ch = flag.get_char();
+		flag.display_flag(get_ch);
+		check_win = flag.check_win(get_ch);
+		//flag.win_treatment(check_win);
+		board.win_treatment(check_win);
 	}
 }
